@@ -26,6 +26,9 @@ body {
     width: 25%;
     max-width: max-content;
     padding: 10px 50px 10px 50px;
+    /*display: flex;*/
+    /*justify-content: flex-end;*/
+    /*flex-direction: column;*/
 }
 
 .avatar {
@@ -61,4 +64,59 @@ body {
     margin-left: -5px;
     border: 5px solid transparent;
     border-top-color: #2980b9;
+}
+
+.box i {
+    cursor: pointer;
+    font-size: 32px;
+}
+
+.login-button {
+    float: right;
+    position: relative;
+    top: 100%;
+    transform: translateY(100%);
+}
+
+.box input {
+    color: #dfe6e9;
+}
+
+::placeholder {
+    color: #ecf0f1;
+}
+
+.box input[type = 'text'], input[type = 'password'] {
+    text-align: center;
+    background: #0984e3;
+    display: block;
+    margin-bottom: 15px;
+    padding: 14px 10px;
+    border: 2px solid #0984e3;
+    outline: none;
+    border-radius: 24px;
+}
+
+.box input[type = 'submit'] {
+    cursor: pointer;
+    background: #16a085;
+    padding: 15px 10px;
+    width: 150px;
+    outline: none;
+    border: none;
+    border-radius: 24px;
+    margin-bottom: 10px;
+}
+
+/*Mobile*/
+.mobileShow {
+    display: none;
+}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px){
+    .mobileShow {
+        display: inline;
+    }
 }

@@ -7,12 +7,9 @@ $(document).ready(function () {
             id: 'tooltip'
         }).appendTo('body');
     }
-    async function moveTooltip(e, item) {
+    function moveTooltip(e, item) {
         tooltip.text(item.attr('alt'));
         currentItem = item;
-        if (isMouseInCurrentItem(e)) {
-            console.log("is in circle");
-        }
         var tw = tooltip.outerWidth(true);
         var th = tooltip.outerHeight(true);
 
