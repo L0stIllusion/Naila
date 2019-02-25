@@ -35,6 +35,7 @@ body {
 }
 
 .box input[type = 'submit'] {
+    vertical-align: bottom;
     cursor: pointer;
     background: #16a085;
     padding: 15px 10px;

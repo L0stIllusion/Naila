@@ -26,9 +26,8 @@ body {
     width: 25%;
     max-width: max-content;
     padding: 10px 50px 10px 50px;
-    /*display: flex;*/
-    /*justify-content: flex-end;*/
-    /*flex-direction: column;*/
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .avatar {
