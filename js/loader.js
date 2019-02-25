@@ -39,21 +39,4 @@ $(document).ready(() => {
             })
         }, 1000)
     }
-
-    $('#next').click(() => {
-        if(current + 1 >= switches.length) {
-            current = 0;
-            doSwitch(current)
-        } else {
-            doSwitch(current++)
-        }
-    });
-    $('#back').click(() => {
-        if(current - 1 <= 0) {
-            current = switches.length;
-            doSwitch(current)
-        } else {
-            doSwitch(current--);
-        }
-    })
 });
