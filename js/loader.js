@@ -1,37 +1,55 @@
 $(document).ready(() => {
     let switches = $('[data-switch]').get();
     let current = 0;
-    let dynamicCSSName;
+    let dynamicCSSNames = [];
     let dynamicCSSLoaded = false;
+    let jsRegex = new RegExp('(js)\\/(.*\\.js)');
+    let cssRegex = new RegExp('(css)\\/(.*\\.css)');
 
     $(switches).each((i, e) => doSwitch(i, $(switches).index(e)));
 
     function doSwitch(index, switchIndex) {
         let toSwitch = $.parseJSON(switches[index].dataset.switch)[switchIndex];
         let html = toSwitch[0];
-        let name = html.substring(0, html.length - 5);
         let identifier = toSwitch[1];
-        toSwitch.shift();
-        toSwitch.shift();
-        let scripts = toSwitch;
+        let scripts = $(toSwitch).filter((i, e) => {
+            try {
+                return jsRegex.exec(e)[2];
+            } catch (e) {
+                return false;
+            }
+        });
+        let cssFiles = $(toSwitch).filter((i, e) => cssRegex.test(e)).map((i, e) => {
+            try {
+                return cssRegex.exec(e)[2];
+            } catch (e) {
+                return "";
+            }
+        });
         $(switches[index])
             .fadeOut(500)
             .promise()
             .done(() => {
                 if(dynamicCSSLoaded) {
-                    $(`link[href = "css/${dynamicCSSName}.css"]`).remove();
+                    $.each(dynamicCSSNames, index => {
+                        $(`link[href = "css/${dynamicCSSNames[index]}"]`).remove();
+                    });
                 }
-                $.ajax({
-                    url: `/Naila/css/${name}.css`,
-                    cache: false,
-                    type:'HEAD',
-                    success: function()
-                    {
-                        dynamicCSSLoaded = true;
-                        dynamicCSSName = name;
-                        $('head').append(`<link rel="stylesheet" href="css/${name}.css">`);
-                    }
-                });
+                $.each(cssFiles, i =>
+                    $.ajax({
+                        url: `/Naila/css/${cssFiles[i]}`,
+                        cache: false,
+                        type:'HEAD',
+                        success: function()
+                        {
+                            dynamicCSSLoaded = true;
+                            dynamicCSSNames.push(cssFiles[index]);
+                            $('head').append(`<link rel="stylesheet" href="css/${cssFiles[i]}">`);
+                        },
+                        error: function () {
+                            console.log("error");
+                        }
+                    }));
                 $(switches[index]).empty().load(`${html} ${identifier}>*`, () => $(scripts).each((index, element) => $.getScript(element))).promise().done((t) => t.fadeIn());
             });
         setTimeout(() => {
