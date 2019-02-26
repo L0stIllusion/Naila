@@ -45,9 +45,6 @@ $(document).ready(() => {
                             dynamicCSSLoaded = true;
                             dynamicCSSNames.push(cssFiles[index]);
                             $('head').append(`<link rel="stylesheet" href="css/${cssFiles[i]}">`);
-                        },
-                        error: function () {
-                            console.log("error");
                         }
                     }));
                 $(switches[index]).empty().load(`${html} ${identifier}>*`, () => $(scripts).each((index, element) => $.getScript(element))).promise().done((t) => t.fadeIn());
