@@ -23,7 +23,7 @@ $(document).ready(() => {
             try {
                 return cssRegex.exec(e)[2];
             } catch (e) {
-                return "";
+                return false;
             }
         });
         $(switches[index])
